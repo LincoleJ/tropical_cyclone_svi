@@ -94,54 +94,7 @@ for (T_0 in 2005:2018) {
   }
 }
 
-all.lags = 1:15
-all.outcome.years = c(2010, 2014, 2016, 2018, 2020)
-all.lags.ns = ns(all.lags, df = 1)
-cmp.ns = ggplot()
-for (i in 1:50) {
-  results_summary = results %>% 
-    filter(iter == i) %>%
-    select(-iter)
-  acee_pe_placebo = results_summary %>%
-    pivot_longer(cols = starts_with("acee_"), 
-                 names_to = "outcome_year",
-                 names_prefix = "acee_",
-                 values_to = "acee") %>%
-    mutate(lag = as.numeric(outcome_year) - as.numeric(exposure_year)) %>%
-    filter(lag > 0)
-  jackfun.placebo = function(end.year) {
-    jack.data.placebo = acee_pe_placebo %>% filter(outcome_year == end.year) 
-    reg.jack.placebo = lm(acee ~ ns(lag, df = 1),
-                          weights = wtd_pop_size,
-                          data = jack.data.placebo)
-    coef(reg.jack.placebo)[1] + coef(reg.jack.placebo)[2] * all.lags.ns
-  }
-  full.reg.placebo = lapply(all.outcome.years, jackfun.placebo)
-  mean.reg.placebo = sapply(seq_along(full.reg.placebo[[1]]), function(i) {
-    mean(sapply(full.reg.placebo, function(v) v[i]))
-  })
-  cmp.ns = cmp.ns + 
-    geom_line(data = data.frame(Lag = all.lags, Diff = mean.reg.placebo),
-              aes(x=Lag, y = Diff), 
-              size = 0.4,
-              color = "grey")
-}
-
-# impose outcome model from actual data over placebo test results
-cmp.ns.placebo = cmp.ns +
-  geom_line(data=data.frame(Lag = all.lags, Diff = mean.reg),
-            aes(x=Lag, y = Diff),
-            size = 1.25,
-            colour = "black") +
-  labs(x = "lag", y = "Difference in SVI") +
-  scale_x_continuous(breaks = c(1, 3, 5, 7, 9, 11, 13, 15)) +
-  theme_minimal()
-ggsave("./latest_missing_data_fixed/analysis/in_space_placebo/main_figure(set_seed).jpg",
-       cmp.ns.placebo)
-
-######## 
-####
-## revise code for better labels in color
+# outcome model for each placebo run.
 all.lags = 1:15
 all.outcome.years = c(2010, 2014, 2016, 2018, 2020)
 all.lags.ns = ns(all.lags, df = 1)
