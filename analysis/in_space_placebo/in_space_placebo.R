@@ -154,9 +154,6 @@ write.csv(weights_data,
 
 ###################################################################################
 ## test code for 2005
-
-
-
 # 不用parallel computing
 time1 = Sys.time()
 weights_data = data.frame(exposure_year = numeric(),
