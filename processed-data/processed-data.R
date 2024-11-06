@@ -10,10 +10,10 @@ library("tidyverse")
 library("purrr")
 
 # read census data
-census_df = readRDS("./latest_missing_data_fixed/raw-data/census-data/census_df.rds")
+census_df = readRDS("./raw-data/census-data/census_df.rds")
 census_postfixes = as.numeric(gsub(".*_([0-9]+)$", "\\1", colnames(census_df[, -1])))
 
-# function to exclude rows whose fips codes are not from contiguous states
+# function to exclude entries not from contiguous states
 exclude_non_contiguous_states <- function(df) {
   contiguous_states <- c("01", "04", "05", "06", "08", "09", "10", "11", "12", 
                          "13", "16", "17", "18", "19", "20", "21", "22", "23", 
