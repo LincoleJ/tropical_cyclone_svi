@@ -1,3 +1,4 @@
+# checks if there are missing data from any covariate, outcome, or exposure variables
 library(tigris)
 
 # ensure fips code consistency over time
@@ -31,7 +32,7 @@ exclude_non_contiguous_states <- function(df) {
   return(contiguous_rows)
 }
 
-df = readRDS("./latest_missing_data_fixed/processed-data/df_2018.rds")
+df = readRDS("./processed-data/df_2018.rds")
 missing_id = apply(df, 1, function(x) any(is.na(x)))
 missing_entries = df[missing_id, ]
 
