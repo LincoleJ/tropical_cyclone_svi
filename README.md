@@ -1,4 +1,4 @@
-# Long-Term Social Vulnerability Changes After Tropical Cyclones in the United States
+# Long-Term Social Vulnerability Changes After Tropical Cyclones in Contiguous U.S.
 
 This is the data repository for publicly available code and data to conduct analyses in the paper titled "Long-Term Social Vulnerability Changes After Tropical Cyclones in the United States."
 
