@@ -7,5 +7,7 @@ We use a synthetic control approach to analyze fourteen years of tropical cyclon
 ### Code:
 
 1. raw-data processes downloaded data
-2. balancing apply covariate balancing synthetic control approach to obtain control weights to create the synthetic control region.
-3. analysis conduct outcome analysis on covariate balanced data to generate main results and result graphs.
+   
+3. balancing apply covariate balancing synthetic control approach to obtain control weights to create the synthetic control region.
+
+4. analysis conduct outcome analysis on covariate balanced data to generate main results and result graphs.
