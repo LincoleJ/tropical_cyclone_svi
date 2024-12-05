@@ -8,8 +8,12 @@ We use a synthetic control approach to analyze fourteen years of tropical cyclon
 
 ### Code:
 
-1. [raw-data](https://github.com/LincoleJ/tropical_cyclone_svi/tree/main/raw-data) and [processed-data](https://github.com/LincoleJ/tropical_cyclone_svi/tree/main/processed-data) process downloaded geospatial and demographic data from various data sources into a tabular for statistical analysis purpose.
+1. [raw-data](https://github.com/LincoleJ/tropical_cyclone_svi/tree/main/raw-data) process downloaded geospatial and demographic data from various data source.
    
-3. [balancing](https://github.com/LincoleJ/tropical_cyclone_svi/tree/main/balancing) apply covariate balancing synthetic control approach to obtain control weights to create the synthetic control region.
+3. [processed-data](https://github.com/LincoleJ/tropical_cyclone_svi/tree/main/processed-data) puts them into a tabular for statistical analysis purpose.
+   
+4. [balancing](https://github.com/LincoleJ/tropical_cyclone_svi/tree/main/balancing) apply covariate balancing synthetic control approach to obtain control weights to create the synthetic control region.
 
-4. [analysis](https://github.com/LincoleJ/tropical_cyclone_svi/tree/main/balancing) conduct outcome analysis on covariate balanced data to generate main results and result graphs.
+5. [analysis](https://github.com/LincoleJ/tropical_cyclone_svi/tree/main/analysis) conduct outcome analysis on covariate balanced data to generate main results and result graphs.
+   
+7. [figures_tables](https://github.com/LincoleJ/tropical_cyclone_svi/tree/main/figures_tables) generate figures and tables in the main text and supplementary materials.
