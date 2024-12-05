@@ -1,4 +1,6 @@
-# Long-Term Social Vulnerability Changes After Tropical Cyclones in Contiguous U.S.
+# Long-Term Social Vulnerability Changes After Tropical Cyclones in Contiguous United States
+
+https://img.shields.io/badge/study_status-in_progress
 
 This is the data repository for publicly available code and data to conduct analyses in the paper titled "Long-Term Effects of Tropical Cyclones on Social Vulnerability in the United States."
 
