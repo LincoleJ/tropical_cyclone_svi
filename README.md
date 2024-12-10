@@ -27,11 +27,15 @@ We use a synthetic control approach to analyze fourteen years of tropical cyclon
 | Tropical Cyclone Exposure | [HURDAT](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html) | 
 | Social Vulnerability Index | [CDC/ATSDR](https://www.atsdr.cdc.gov/place-health/php/svi/svi-data-documentation-download.html) |
 | Metereological | [PRISM](https://prism.oregonstate.edu/) |
-
+| Percentage Minority Population | [CDC Wonder](https://wonder.cdc.gov/) |
+| Gender Ratio | [CDC Wonder](https://wonder.cdc.gov/) |
+| Per Capita Income | [BEA](https://www.bea.gov/data/income-saving/personal-income-county-metro-and-other-areas) |
+| Percentage Below Poverty Threshold | [USCB](https://www.census.gov/topics/income-poverty/poverty/data/datasets.html) |
+| Percentage High School Graduate | [USDA](https://data.ers.usda.gov/reports.aspx?ID=17829)
 
 ### Data: 
 
-All data needed to evaluate the conclusions in the paper are present in the paper and/or the Supplementary Information and Online Repository. Those interested in the original data can contact the corresponding author.
+All data needed to evaluate the conclusions in the paper are present in the paper and/or the Supplementary Information and Online Repository. Those interested in the original data can contact the corresponding author. 
 
 All the analyses are run on local R.
 
