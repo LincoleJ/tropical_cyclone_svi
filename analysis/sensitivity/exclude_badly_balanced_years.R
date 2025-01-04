@@ -5,12 +5,12 @@ library(mgcv)
 library(splines)
 
 # extract acee estimates
-acee_pe = do.call(rbind, lapply(list.files(path = "./latest_missing_data_fixed/analysis/preliminary/acee",
+acee_pe = do.call(rbind, lapply(list.files(path = "./analysis/preliminary/acee",
                                            pattern = "\\.csv$", 
                                            full.names = T), 
                                 read_csv))[, 6:10] %>%
   filter(lag > 0)
-wtd_pop_ctrl = do.call(rbind, lapply(list.files(path = "./latest_missing_data_fixed/analysis/preliminary/wtd_pop_ctrl/",
+wtd_pop_ctrl = do.call(rbind, lapply(list.files(path = "./analysis/preliminary/wtd_pop_ctrl/",
                                                 pattern = "\\.csv$", 
                                                 full.names = T), 
                                      read_csv))[, 2:5] %>%
@@ -103,5 +103,5 @@ ci.plot.sens.1 = ggplot(data = results.sens.1, aes(x = year, y = diff)) +
   xlab("Years since exposure") +
   ylab("Difference in outcome") 
 
-ggsave("./latest_missing_data_fixed/figures_tables/ci_exclu_poor_bal.jpg",
+ggsave("./figures_tables/ci_exclu_poor_bal.jpg",
        width = 14, height = 8)
