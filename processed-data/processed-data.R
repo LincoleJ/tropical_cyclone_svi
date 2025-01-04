@@ -32,21 +32,21 @@ exclude_non_contiguous_states <- function(df) {
 for (y in 2005:2018) {
   
   # import hurricane exposure data
-  hurr_dat <- read_csv("./latest_missing_data_fixed/raw-data/tc-data/hurr_dat.csv")[-1] %>% #select(-county_name) %>%
+  hurr_dat <- read_csv("./raw-data/tc-data/hurr_dat.csv")[-1] %>% #select(-county_name) %>%
     pivot_longer(cols = !fips, names_to = "year", values_to = "exposure") %>% filter(year <= y) %>%
     janitor::clean_names() %>%
     pivot_wider(names_from = year, values_from = exposure) %>%
     rename_with(.fn = function(.x){paste0("exposure_", .x)}, .cols = -c(fips))
   
   # import previous svi data
-  svi_dat <- read_csv("./latest_missing_data_fixed/raw-data/svi-data/svi_dat.csv")[-1] %>% 
+  svi_dat <- read_csv("./raw-data/svi-data/svi_dat.csv")[-1] %>% 
     pivot_longer(cols = !fips, names_to = "year", values_to = "svi") %>%
     janitor::clean_names() %>% filter(year < y) %>%
     pivot_wider(names_from = year, values_from = svi) %>%
     rename_with(.fn = function(.x){paste0("svi_", .x)}, .cols = -c(fips))
   
   # import meteorological data
-  weather_dat <- read_csv("./latest_missing_data_fixed/raw-data/weather-data/seasonal_means.csv")[-1] %>% 
+  weather_dat <- read_csv("./raw-data/weather-data/seasonal_means.csv")[-1] %>% 
     filter(year < y) %>% janitor::clean_names() %>%
     pivot_wider(names_from = year, values_from = c(tmean, ppt_mean))
   
@@ -67,7 +67,7 @@ for (y in 2005:2018) {
   df = exclude_non_contiguous_states(df)
   
   # save as RDS file
-  saveRDS(df, paste0("./latest_missing_data_fixed/processed-data/df_", y,".rds"))
+  saveRDS(df, paste0("./processed-data/df_", y,".rds"))
 }
 
 # check missing data
