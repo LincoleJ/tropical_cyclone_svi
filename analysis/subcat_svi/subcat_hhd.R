@@ -14,10 +14,10 @@ library(splines)
 
 ####-----Calculate ACEE Point Estimates for subcategories of SVI-----####
 for (T_0 in 2005:2018) {
-  df = readRDS(paste0("./latest_missing_data_fixed/processed-data/df_", T_0, ".rds")) %>%
+  df = readRDS(paste0("./processed-data/df_", T_0, ".rds")) %>%
     filter(fips != 42033,
            fips != 35039)
-  res = readRDS(list.files(file.path("./latest_missing_data_fixed/balancing/weights-data-upd"),
+  res = readRDS(list.files(file.path("./balancing/weights-data-upd"),
                            pattern = paste(T_0),
                            full.names = TRUE))
   df_weight = df %>% drop_na()
@@ -31,7 +31,7 @@ for (T_0 in 2005:2018) {
     select(fips, weight)
   
   # import outcome variables (i.e., SVI from 2010, 2014, 2016, 2018, 2020)
-  svi_grouped_age17 = read_csv("./latest_missing_data_fixed/raw-data/svi-data/svi_hhd_var/svi_dat_age17.csv")[-c(1)] %>%
+  svi_grouped_age17 = read_csv("./raw-data/svi-data/svi_hhd_var/svi_dat_age17.csv")[-c(1)] %>%
     filter(fips != 42033,
            fips != 35039)
   svi_colnames_age17 = c("fips", paste0("svi_", colnames(svi_grouped_age17)[-1]))
@@ -61,9 +61,9 @@ for (T_0 in 2005:2018) {
            lag = outcome_year - exposure_year,
            acee = difference,
            baseline = control)
-  write.csv(acee_df_age17, paste0("./latest_missing_data_fixed/analysis/subcat_svi/subvars_hhd/svi_age17/acee_", T_0, ".csv"))
+  write.csv(acee_df_age17, paste0("./analysis/subcat_svi/subvars_hhd/svi_age17/acee_", T_0, ".csv"))
   
-  svi_grouped_age65 = read_csv("./latest_missing_data_fixed/raw-data/svi-data/svi_hhd_var/svi_dat_age65.csv")[-c(1)] %>%
+  svi_grouped_age65 = read_csv("./raw-data/svi-data/svi_hhd_var/svi_dat_age65.csv")[-c(1)] %>%
     filter(fips != 42033,
            fips != 35039)
   svi_colnames_age65 = c("fips", paste0("svi_", colnames(svi_grouped_age65)[-1]))
@@ -93,9 +93,9 @@ for (T_0 in 2005:2018) {
            lag = outcome_year - exposure_year,
            acee = difference,
            baseline = control)
-  write.csv(acee_df_age65, paste0("./latest_missing_data_fixed/analysis/subcat_svi/subvars_hhd/svi_age65/acee_", T_0, ".csv"))
+  write.csv(acee_df_age65, paste0("./analysis/subcat_svi/subvars_hhd/svi_age65/acee_", T_0, ".csv"))
   
-  svi_grouped_disabl = read_csv("./latest_missing_data_fixed/raw-data/svi-data/svi_hhd_var/svi_dat_disabl.csv")[-c(1)] %>%
+  svi_grouped_disabl = read_csv("./raw-data/svi-data/svi_hhd_var/svi_dat_disabl.csv")[-c(1)] %>%
     filter(fips != 42033,
            fips != 35039)
   svi_colnames_disabl = c("fips", paste0("svi_", colnames(svi_grouped_disabl)[-1]))
@@ -125,9 +125,9 @@ for (T_0 in 2005:2018) {
            lag = outcome_year - exposure_year,
            acee = difference,
            baseline = control)
-  write.csv(acee_df_disabl, paste0("./latest_missing_data_fixed/analysis/subcat_svi/subvars_hhd/svi_disabl/acee_", T_0, ".csv"))
+  write.csv(acee_df_disabl, paste0("./analysis/subcat_svi/subvars_hhd/svi_disabl/acee_", T_0, ".csv"))
   
-  svi_grouped_sngpnt = read_csv("./latest_missing_data_fixed/raw-data/svi-data/svi_hhd_var/svi_dat_sngpnt.csv")[-c(1)] %>%
+  svi_grouped_sngpnt = read_csv("./raw-data/svi-data/svi_hhd_var/svi_dat_sngpnt.csv")[-c(1)] %>%
     filter(fips != 42033,
            fips != 35039)
   svi_colnames_sngpnt = c("fips", paste0("svi_", colnames(svi_grouped_sngpnt)[-1]))
@@ -157,31 +157,31 @@ for (T_0 in 2005:2018) {
            lag = outcome_year - exposure_year,
            acee = difference,
            baseline = control)
-  write.csv(acee_df_sngpnt, paste0("./latest_missing_data_fixed/analysis/subcat_svi/subvars_hhd/svi_sngpnt/acee_", T_0, ".csv"))
+  write.csv(acee_df_sngpnt, paste0("./analysis/subcat_svi/subvars_hhd/svi_sngpnt/acee_", T_0, ".csv"))
 }
 
 # extract acee estimates
-acee_pe_age17 = do.call(rbind, lapply(list.files(path = "./latest_missing_data_fixed/analysis/subcat_svi/subvars_hhd/svi_age17/",
+acee_pe_age17 = do.call(rbind, lapply(list.files(path = "./analysis/subcat_svi/subvars_hhd/svi_age17/",
                                              pattern = "\\.csv$", 
                                              full.names = T), 
                                   read_csv))[, 6:10] %>%
   filter(lag > 0)
-acee_pe_age65 = do.call(rbind, lapply(list.files(path = "./latest_missing_data_fixed/analysis/subcat_svi/subvars_hhd/svi_age65",
+acee_pe_age65 = do.call(rbind, lapply(list.files(path = "./analysis/subcat_svi/subvars_hhd/svi_age65",
                                              pattern = "\\.csv$", 
                                              full.names = T), 
                                   read_csv))[, 6:10] %>%
   filter(lag > 0)
-acee_pe_disabl = do.call(rbind, lapply(list.files(path = "./latest_missing_data_fixed/analysis/subcat_svi/subvars_hhd/svi_disabl",
+acee_pe_disabl = do.call(rbind, lapply(list.files(path = "./analysis/subcat_svi/subvars_hhd/svi_disabl",
                                              pattern = "\\.csv$", 
                                              full.names = T), 
                                   read_csv))[, 6:10] %>%
   filter(lag > 0)
-acee_pe_sngpnt = do.call(rbind, lapply(list.files(path = "./latest_missing_data_fixed/analysis/subcat_svi/subvars_hhd/svi_sngpnt",
+acee_pe_sngpnt = do.call(rbind, lapply(list.files(path = "./analysis/subcat_svi/subvars_hhd/svi_sngpnt",
                                              pattern = "\\.csv$", 
                                              full.names = T), 
                                   read_csv))[, 6:10] %>%
   filter(lag > 0)
-wtd_pop_ctrl = do.call(rbind, lapply(list.files(path = "./latest_missing_data_fixed/analysis/preliminary/wtd_pop_ctrl/",
+wtd_pop_ctrl = do.call(rbind, lapply(list.files(path = "./analysis/preliminary/wtd_pop_ctrl/",
                                                 pattern = "\\.csv$", 
                                                 full.names = T), 
                                      read_csv))[, 2:5] %>%
@@ -432,7 +432,7 @@ jackreps.disabl = t(sapply(1:length(all.outcome.years.disabl),
 domain.disabl = c("Percentage Disabled")
 jack.ci.plot(jackreps.disabl, mean.reg.disabl, domain.disabl, all.lags)
 
-path = "./latest_missing_data_fixed/analysis/subcat_svi/plots"
+path = "./analysis/subcat_svi/plots"
 ggsave(paste0(path, "/cmp.plot.age17.png"),
        cmp.plot.age17)
 ggsave(paste0(path, "/cmp.plot.age65.png"),
