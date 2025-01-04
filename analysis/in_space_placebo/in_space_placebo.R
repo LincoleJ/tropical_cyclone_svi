@@ -26,7 +26,7 @@ exclude_non_contiguous_states <- function(df) {
 # load tropical cyclone data, 
 # define placebo pool to regions not exposed to any tropical cyclone 1995-2018
 # exclude non-contiguous counties
-hurr_dat <- read_csv("./latest_missing_data_fixed/raw-data/tc-data/hurr_dat.csv")[,-1] %>%
+hurr_dat <- read_csv("./raw-data/tc-data/hurr_dat.csv")[,-1] %>%
   exclude_non_contiguous_states() %>%
   filter(fips != 42033,
          fips != 35039)
@@ -60,7 +60,7 @@ weights_data = data.frame(exposure_year = numeric(),
                           weight = numeric())
 
 for (T_0 in 2005:2018) {
-  df = readRDS(paste0("./latest_missing_data_fixed/processed-data/df_", T_0, ".rds")) %>% 
+  df = readRDS(paste0("./processed-data/df_", T_0, ".rds")) %>% 
     drop_na() %>%
     filter(fips != 42033,
            fips != 35039)
@@ -150,7 +150,7 @@ for (T_0 in 2005:2018) {
 }
 stopImplicitCluster()
 write.csv(weights_data,
-          "./latest_missing_data_fixed/analysis/in_space_placebo/weights_data_(set_seed).csv")
+          "./analysis/in_space_placebo/weights_data_(set_seed).csv")
 
 ###################################################################################
 ## test code for 2005
@@ -162,7 +162,7 @@ weights_data = data.frame(exposure_year = numeric(),
                           placebo = numeric(),
                           weight = numeric())
 T_0 = 2005
-df = readRDS(paste0("./latest_missing_data_fixed/processed-data/df_", T_0, ".rds")) %>% 
+df = readRDS(paste0("./processed-data/df_", T_0, ".rds")) %>% 
   drop_na() %>%
   filter(fips != 42033,
          fips != 35039)
@@ -252,7 +252,7 @@ time2 - time1
 
 # full data frame
 for (T_0 in 2005:2018) {
-  df = readRDS(paste0("./latest_missing_data_fixed/processed-data/df_", T_0, ".rds")) %>% 
+  df = readRDS(paste0("./processed-data/df_", T_0, ".rds")) %>% 
     drop_na() %>%
     filter(fips != 42033,
            fips != 35039)
