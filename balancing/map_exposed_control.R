@@ -39,8 +39,8 @@ counties_sf = counties(cb = TRUE) %>%
 
 
 for (year in 2005:2018) {
-  df = readRDS(paste0("./latest_missing_data_fixed/processed-data/df_", year, ".rds"))
-  weights = readRDS(list.files(file.path("./latest_missing_data_fixed/balancing/weights-data-upd"),
+  df = readRDS(paste0("./processed-data/df_", year, ".rds"))
+  weights = readRDS(list.files(file.path("./balancing/weights-data-upd"),
                                pattern = paste(year),
                                full.names = TRUE))
   df_weight = df %>% drop_na() %>%
@@ -79,14 +79,14 @@ for (year in 2005:2018) {
           legend.box = "vertical",
           legend.box.just = "left",
           legend.spacing.y = unit(0.05, "cm")) 
-  ggsave(file.path("./latest_missing_data_fixed/balancing/map_figures", paste0("map_region", year, ".jpeg")), 
+  ggsave(file.path("./balancing/map_figures", paste0("map_region", year, ".jpeg")), 
          map_p)
 }
 
 # test code 
 year = 2015
-df = readRDS(paste0("./latest_missing_data_fixed/processed-data/df_", year, ".rds"))
-weights = readRDS(list.files(file.path("./latest_missing_data_fixed/balancing/weights-data-upd"),
+df = readRDS(paste0("./processed-data/df_", year, ".rds"))
+weights = readRDS(list.files(file.path("./balancing/weights-data-upd"),
                              pattern = paste(year),
                              full.names = TRUE))
 df_weight = df %>% drop_na() %>%
@@ -128,8 +128,8 @@ map_p = ggplot() +
 
 #### test code for show exposed regions
 year = 2012
-df = readRDS(paste0("./latest_missing_data_fixed/processed-data/df_", year, ".rds"))
-weights = readRDS(list.files(file.path("./latest_missing_data_fixed/balancing/weights-data-upd"),
+df = readRDS(paste0("./processed-data/df_", year, ".rds"))
+weights = readRDS(list.files(file.path("./balancing/weights-data-upd"),
                              pattern = paste(year),
                              full.names = TRUE))
 df_weight = df %>% drop_na() %>%
@@ -166,8 +166,8 @@ map_p = ggplot() +
 ##############
 ###### check distribution of weights
 for (year in 2005:2018) {
-  df = readRDS(paste0("./latest_missing_data_fixed/processed-data/df_", year, ".rds"))
-  weights = readRDS(list.files(file.path("./latest_missing_data_fixed/balancing/weights-data-upd"),
+  df = readRDS(paste0("./processed-data/df_", year, ".rds"))
+  weights = readRDS(list.files(file.path("./balancing/weights-data-upd"),
                                pattern = paste(year),
                                full.names = TRUE))
   df_weight = df %>% drop_na() %>%
@@ -181,7 +181,7 @@ for (year in 2005:2018) {
   control_counties = df_weight %>% 
     filter(!is.na(control)) %>%
     mutate(normalized_weight = weight / max(weight))
-  png(paste0("./latest_missing_data_fixed/balancing/sensitivity/dist_weights_ctrls/", year, "_control_weights.png"))
+  png(paste0("./balancing/sensitivity/dist_weights_ctrls/", year, "_control_weights.png"))
   hist(control_counties$normalized_weight)
   dev.off()
 }
