@@ -12,10 +12,10 @@ library(splines)
 
 ####-----Calculate ACEE Point Estimates and weighted population size-----####
 for (T_0 in 2005:2018) {
-  df = readRDS(paste0("./latest_missing_data_fixed/processed-data/df_", T_0, ".rds")) %>% 
+  df = readRDS(paste0("./processed-data/df_", T_0, ".rds")) %>% 
     filter(fips != 35039,
            fips != 42033)
-  res = readRDS(list.files(file.path("./latest_missing_data_fixed/balancing/weights-data-upd"),
+  res = readRDS(list.files(file.path("./balancing/weights-data-upd"),
                            pattern = paste(T_0),
                            full.names = TRUE))
   df_weight = df %>% drop_na()
@@ -59,15 +59,15 @@ for (T_0 in 2005:2018) {
            lag = outcome_year - exposure_year,
            acee = difference,
            baseline = control)
-  write.csv(acee_df, paste0("./latest_missing_data_fixed/analysis/preliminary/acee/acee_", T_0, ".csv"))
+  write.csv(acee_df, paste0("./analysis/preliminary/acee/acee_", T_0, ".csv"))
 }
 
 for (T_0 in 2005:2018) {
   # get county-level population
-  df = readRDS(paste0("./latest_missing_data_fixed/processed-data/df_", T_0, ".rds")) %>%
+  df = readRDS(paste0("./processed-data/df_", T_0, ".rds")) %>%
     filter(fips != 35039,
            fips != 42033)
-  res = readRDS(list.files(file.path("./latest_missing_data_fixed/balancing/weights-data-upd"),
+  res = readRDS(list.files(file.path("./balancing/weights-data-upd"),
                            pattern = paste(T_0),
                            full.names = TRUE))
   df_weight = df %>% drop_na()
@@ -116,17 +116,17 @@ for (T_0 in 2005:2018) {
            lag = outcome_year - exposure_year,
            wtd_pop_ctrl = control) %>%
     select(exposure_year, outcome_year, lag, wtd_pop_ctrl)
-  write.csv(wtd_pop_df, paste0("./latest_missing_data_fixed/analysis/preliminary/wtd_pop_ctrl/wtd_pop_ctrl_", T_0, ".csv"))
+  write.csv(wtd_pop_df, paste0("./analysis/preliminary/wtd_pop_ctrl/wtd_pop_ctrl_", T_0, ".csv"))
 }
 
 #####---------Relative Difference in SVI vs Year Since Exposure---------#######
 # extract acee estimates
-acee_pe = do.call(rbind, lapply(list.files(path = "./latest_missing_data_fixed/analysis/preliminary/acee",
+acee_pe = do.call(rbind, lapply(list.files(path = "./analysis/preliminary/acee",
                                            pattern = "\\.csv$", 
                                            full.names = T), 
                                 read_csv))[, 6:10] %>%
   filter(lag > 0)
-wtd_pop_ctrl = do.call(rbind, lapply(list.files(path = "./latest_missing_data_fixed/analysis/preliminary/wtd_pop_ctrl/",
+wtd_pop_ctrl = do.call(rbind, lapply(list.files(path = "./analysis/preliminary/wtd_pop_ctrl/",
                                                 pattern = "\\.csv$", 
                                                 full.names = T), 
                                      read_csv))[, 2:5] %>%
