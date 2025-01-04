@@ -22,13 +22,13 @@ exclude_non_contiguous_states <- function(df) {
 }
 
 # import weights data
-weights_data = read_csv("./latest_missing_data_fixed/analysis/in_space_placebo/weights_data_(set_seed).csv")[, -1]
+weights_data = read_csv("./analysis/in_space_placebo/weights_data_(set_seed).csv")[, -1]
 
 ################################################################################ 
 #########################---------main figure---------##########################
 ################################################################################ 
 # import outcome variables (i.e., SVI from 2010, 2014, 2016, 2018, 2020)
-svi_grouped = read_csv("./latest_missing_data_fixed/raw-data/svi-data/svi_dat.csv")[-c(1, 3)] %>%
+svi_grouped = read_csv("./raw-data/svi-data/svi_dat.csv")[-c(1, 3)] %>%
   filter(fips != 42033,
          fips != 35039)
 svi_colnames = c("fips", paste0("svi_", colnames(svi_grouped)[-1]))
@@ -170,11 +170,11 @@ cmp.ns.placebo = cmp.ns +
         legend.background = element_rect(fill = "white", colour = "black"), # box around legend
         legend.key = element_rect(fill = "transparent"))
 
-ggsave("./latest_missing_data_fixed/figures_tables/placebo_main.jpg", cmp.ns.placebo)
+ggsave("./figures_tables/placebo_main.jpg", cmp.ns.placebo)
 
 #########---------for subcategories of SVI-------
 for (svi_subcat in c("housing", "ses", "minority", "hhd")) {
-  svi_file_name = paste0("./latest_missing_data_fixed/raw-data/svi-data/svi_dat_", 
+  svi_file_name = paste0("./raw-data/svi-data/svi_dat_", 
                          svi_subcat, ".csv")
   svi_grouped = read_csv(svi_file_name)[-c(1, 3)] %>%
     filter(fips != 42033,
@@ -227,13 +227,13 @@ for (svi_subcat in c("housing", "ses", "minority", "hhd")) {
     }
   }
   write.csv(svi_subcat_results, 
-            paste0("./latest_missing_data_fixed/analysis/in_space_placebo/subcat_svi/",
+            paste0("./analysis/in_space_placebo/subcat_svi/",
                    svi_subcat, "_results.csv"))
 }
 # 
 # for (svi_subcat in c("housing", "ses", "minority", "hhd")) {
 #   cmp.placebo.subcat = ggplot()
-#   file_name = paste0("latest_missing_data_fixed/analysis/in_space_placebo/subcat/svi", svi_subcat, "_results.csv")
+#   file_name = paste0("analysis/in_space_placebo/subcat/svi", svi_subcat, "_results.csv")
 #   svi_subcat_results = read_csv(file_name)
 #   for (i in 1:50) {
 #     results_summary = svi_subcat_results %>% filter(iter == i) %>%
@@ -265,7 +265,7 @@ for (svi_subcat in c("housing", "ses", "minority", "hhd")) {
 # }
 
 cmp.ns.placebo.housing = ggplot()
-svi_housing_results = read_csv("./latest_missing_data_fixed/analysis/in_space_placebo/subcat_svi/housing_results.csv")
+svi_housing_results = read_csv("./analysis/in_space_placebo/subcat_svi/housing_results.csv")
 for (i in 1:50) {
   results_summary = svi_housing_results %>% 
     filter(iter == i) %>%
@@ -301,12 +301,12 @@ cmp.ns.placebo.housing = cmp.ns.placebo.housing +
             color = "blue") +
   labs(title = "Placebo Test: Housing & Transportation")
 
-ggsave("./latest_missing_data_fixed/analysis/in_space_placebo/housing.jpg")
+ggsave("./analysis/in_space_placebo/housing.jpg")
 
 
 #### socioeconomic domain
 cmp.ns.placebo.ses = ggplot()
-svi_ses_results = read_csv("./latest_missing_data_fixed/analysis/in_space_placebo/subcat_svi/ses_results.csv")
+svi_ses_results = read_csv("./analysis/in_space_placebo/subcat_svi/ses_results.csv")
 for (i in 1:50) {
   results_summary = svi_ses_results %>% 
     filter(iter == i) %>%
@@ -342,11 +342,11 @@ cmp.ns.placebo.ses = cmp.ns.placebo.ses +
             color = "blue") +
   labs(title = "Placebo Test: Socioeconomic")
 
-ggsave("./latest_missing_data_fixed/analysis/in_space_placebo/ses.jpg")
+ggsave("./analysis/in_space_placebo/ses.jpg")
 
 #### Household Decomposition domain
 cmp.ns.placebo.hhd = ggplot()
-svi_hhd_results = read_csv("./latest_missing_data_fixed/analysis/in_space_placebo/subcat_svi/hhd_results.csv")
+svi_hhd_results = read_csv("./analysis/in_space_placebo/subcat_svi/hhd_results.csv")
 for (i in 1:50) {
   results_summary = svi_hhd_results %>% 
     filter(iter == i) %>%
@@ -382,10 +382,10 @@ cmp.ns.placebo.hhd = cmp.ns.placebo.hhd +
             color = "blue") +
   labs(title = "Placebo Test: Household Decomposition")
 
-ggsave("./latest_missing_data_fixed/analysis/in_space_placebo/hhd.jpg")
+ggsave("./analysis/in_space_placebo/hhd.jpg")
 
 cmp.ns.placebo.minority = ggplot()
-svi_minority_results = read_csv("./latest_missing_data_fixed/analysis/in_space_placebo/subcat_svi/minority_results.csv")
+svi_minority_results = read_csv("./analysis/in_space_placebo/subcat_svi/minority_results.csv")
 all.lags.ns.3 = ns(all.lags, df = 2)
 for (i in 1:50) {
   results_summary = svi_minority_results %>% 
@@ -422,14 +422,14 @@ cmp.ns.placebo.minority = cmp.ns.placebo.minority +
             aes(x=Lag, y = Diff),
             color = "blue") +
   labs(title = "Placebo Test: Minority Status / Language")
-ggsave("./latest_missing_data_fixed/analysis/in_space_placebo/minority.jpg")
+ggsave("./analysis/in_space_placebo/minority.jpg")
 
 
 ################################################################################
 ### calculate the p-values associated with placebo analysis
 
 ## household domain
-svi_hhd_results = read_csv("./latest_missing_data_fixed/analysis/in_space_placebo/subcat_svi/hhd_results.csv")
+svi_hhd_results = read_csv("./analysis/in_space_placebo/subcat_svi/hhd_results.csv")
 pval_df = data.frame(iter = numeric(),
                      chng = numeric())
 for (i in 1:50) {
@@ -464,7 +464,7 @@ sum(abs(pval_df$chng) >= coef(lm(mean.reg.2 ~ all.lags))[2])
 
 
 ## minority status / english proficiency
-svi_minority_results = read_csv("./latest_missing_data_fixed/analysis/in_space_placebo/subcat_svi/minority_results.csv")
+svi_minority_results = read_csv("./analysis/in_space_placebo/subcat_svi/minority_results.csv")
 all.lags.ns.3 = ns(all.lags, df = 2)
 pval_df_minority = data.frame(iter = numeric(),
                               chng = numeric())
