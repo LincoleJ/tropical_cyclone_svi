@@ -42,4 +42,4 @@ All the analyses are run on local R.
 
 ### Contact us: 
 
-* Email: xw2892@cumc.columbia.edu; lj2575@cumc.columbia.edu; rmp2198@columbia.edu
+* Email: xw2892@cumc.columbia.edu; lj2575@cumc.columbia.edu; yoshira@ucla.edu; rmp2198@columbia.edu
