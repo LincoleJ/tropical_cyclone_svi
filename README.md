@@ -1,4 +1,4 @@
-# Long-Term Social Vulnerability Changes After Tropical Cyclones in Contiguous United States
+# Evolution of Long-Term Social Vulnerability After Tropical Cyclones in the United States
 
 ![image](https://github.com/user-attachments/assets/c9d95746-171c-456b-8445-feab8ab6484c)
 
