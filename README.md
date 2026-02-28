@@ -19,6 +19,8 @@ We use a synthetic control approach to analyze fourteen years of tropical cyclon
    
 5. [figures_tables](https://github.com/LincoleJ/tropical_cyclone_svi/tree/main/figures_tables) generate figures and tables in the main text and supplementary materials.
 
+6. [sensitivity](https://github.com/LincoleJ/tropical_cyclone_svi/tree/main/sensitivity) conducts an additional analyses for sensitivity analyses.
+
 
 ### Data Source:
 
