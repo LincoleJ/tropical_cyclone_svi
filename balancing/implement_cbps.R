@@ -8,12 +8,12 @@ library("dplyr")
 source("./balancing/cbps_ATT.R")
 
 ##############---------with selected penalization parameter lambda---------##############
-opt_asmd = read_csv("./latest_missing_data_fixed/balancing/sensitivity/opt_asmd.csv")[, -1]
+opt_asmd = read_csv("./balancing/sensitivity/opt_asmd.csv")[, -1]
 
 for (i in 1:nrow(opt_asmd)) {
   year = opt_asmd$year[i]
   t = opt_asmd$t[i]
-  file_directory = paste0("./latest_missing_data_fixed/processed-data/df_", year, ".rds")
+  file_directory = paste0("./processed-data/df_", year, ".rds")
   df = readRDS(file_directory) %>%
     filter(fips != 42033,
            fips != 35039)
@@ -37,11 +37,11 @@ for (i in 1:nrow(opt_asmd)) {
   converge_set = (sapply(res_regu.list, function(res) res$convergence))
   res = res_regu.list[[min(which(converge_set == 0))]]
   lambda = 10^{min(which(converge_set == 0)) - t}
-  saveRDS(res, paste0("./latest_missing_data_fixed/balancing/weights-data-upd/weights-data_", year, "_tc_", lambda ,".RDS"))
+  saveRDS(res, paste0("./balancing/weights-data-upd/weights-data_", year, "_tc_", lambda ,".RDS"))
 }
 
 for (year in 2005:2018) {
-  file_directory = paste0("./latest_missing_data_fixed/processed-data/df_", year, ".rds")
+  file_directory = paste0("./processed-data/df_", year, ".rds")
   df = readRDS(file_directory) %>%
     filter(fips != 42033,
            fips != 35039)
@@ -65,5 +65,5 @@ for (year in 2005:2018) {
   converge_set = (sapply(res_regu.list, function(res) res$convergence))
   res = res_regu.list[[min(which(converge_set == 0))]]
   lambda = 10^{min(which(converge_set == 0)) - 7}
-  saveRDS(res, paste0("./latest_missing_data_fixed/balancing/weights-data/weights-data_", year, "_tc_", lambda ,".RDS"))
+  saveRDS(res, paste0("./balancing/weights-data/weights-data_", year, "_tc_", lambda ,".RDS"))
 }
