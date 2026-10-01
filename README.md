@@ -2,7 +2,7 @@
 
 ![image](https://img.shields.io/badge/Study_Status-Published-green)
 
-This is the data repository for publicly available code and data to conduct analyses in the paper titled "Long-Term Effects of Tropical Cyclones on Social Vulnerability in the United States."
+This is the data repository for publicly available code and data to conduct analyses in the paper titled "Long-Term Effects of Tropical Cyclones on Social Vulnerability in the United States." [paper link](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GH001727)
 
 We use a synthetic control approach to analyze fourteen years of tropical cyclone exposure data across contiguous U.S., and provide evidence that tropical cyclone exposures first induces a spike in social vulnerability immediately after tropical cyclones, but over time, affected regions tend to recover and experience gentrification, and exhibit even lower social vulnerability in the long run compared to similar regions not affected by tropical cyclones.
 
